@@ -60,12 +60,12 @@
         android:id="@+id/btn_return"
         android:layout_width="212dp"
         android:layout_height="54dp"
-        android:text="Đoán lại"
-        android:textSize="24sp"
-        android:textColor="@color/white"
-        android:background="@drawable/next"
         android:layout_below="@id/iv_avatar_icon"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/next"
+        android:text="Đoán lại"
+        android:textColor="@color/white"
+        android:textSize="24sp" />
     <FrameLayout
         android:id="@+id/fl_anh"
         android:layout_width="match_parent"
