@@ -472,9 +472,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         for (i in 0..7) {
             btnHang4 = ll_hang4.getChildAt(i) as Button
             btnHang4.setText(listHinhAnh[temp].chuoiDapAn[i].toString())
-        }
-
-        for (i in 0..7) {
             btnHang3 = ll_hang3.getChildAt(i) as Button
             btnHang3.setText(listHinhAnh[temp].chuoiDapAn[i + 8].toString())
         }
