@@ -16,10 +16,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private val listHinhAnh: MutableList<HinhAnh>
     private var random: Random
     private var check = 0
-    private lateinit var btnHang1: Button
-    private lateinit var btnHang2: Button
-    private lateinit var btnHang3: Button
-    private lateinit var btnHang4: Button
     private lateinit var btnAdd: Button
     private var temp = 0
     private var ketQua = ""
@@ -159,11 +155,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private fun action(btn: Button) {
         if (isDone) {
             if (check <= 7) {
-                btnHang1 = ll_hang1.getChildAt(check) as Button
-                btnHang1.setText(btn.text.toString())
+                btnAdd = ll_hang1.getChildAt(check) as Button
+                btnAdd.setText(btn.text.toString())
             } else {
-                btnHang2 = ll_hang2.getChildAt(check - 8) as Button
-                btnHang2.setText(btn.text.toString())
+                btnAdd = ll_hang2.getChildAt(check - 8) as Button
+                btnAdd.setText(btn.text.toString())
             }
             btn.isInvisible = true
             check++
@@ -268,20 +264,20 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         btn_return.isInvisible = true
         if (check <= 8) {
             for (i in 0..ketQua.length - 1) {
-                btnHang1 = ll_hang1.getChildAt(i) as Button
-                btnHang1.setText("")
-                btnHang1.setBackgroundResource(R.drawable.tile_normal)
+                btnAdd = ll_hang1.getChildAt(i) as Button
+                btnAdd.setText("")
+                btnAdd.setBackgroundResource(R.drawable.tile_normal)
             }
         } else {
             for (i in 0..7) {
-                btnHang1 = ll_hang1.getChildAt(i) as Button
-                btnHang1.setText("")
-                btnHang1.setBackgroundResource(R.drawable.tile_normal)
+                btnAdd = ll_hang1.getChildAt(i) as Button
+                btnAdd.setText("")
+                btnAdd.setBackgroundResource(R.drawable.tile_normal)
             }
             for (i in 0..check - 9) {
-                btnHang2 = ll_hang2.getChildAt(i) as Button
-                btnHang2.setText("")
-                btnHang2.setBackgroundResource(R.drawable.tile_normal)
+                btnAdd = ll_hang2.getChildAt(i) as Button
+                btnAdd.setText("")
+                btnAdd.setBackgroundResource(R.drawable.tile_normal)
             }
         }
         check = 0
@@ -290,8 +286,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private fun checkResult() {
         if (check == ketQua.length && check <= 8) {
             for (i in 0..ketQua.length - 1) {
-                btnHang1 = ll_hang1.getChildAt(i) as Button
-                strResult += btnHang1.text.toString()
+                btnAdd = ll_hang1.getChildAt(i) as Button
+                strResult += btnAdd.text.toString()
             }
             if (ketQua.equals(strResult)) {
                 actionWin()
@@ -301,12 +297,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             isDone = false
         } else if (check == ketQua.length && check > 8) {
             for (i in 0..7) {
-                btnHang1 = ll_hang1.getChildAt(i) as Button
-                strResult += btnHang1.text.toString()
+                btnAdd = ll_hang1.getChildAt(i) as Button
+                strResult += btnAdd.text.toString()
             }
             for (i in 0..ketQua.length - 9) {
-                btnHang2 = ll_hang2.getChildAt(i) as Button
-                strResult += btnHang2.text.toString()
+                btnAdd = ll_hang2.getChildAt(i) as Button
+                strResult += btnAdd.text.toString()
             }
             if (ketQua.equals(strResult)) {
                 actionWin()
@@ -324,20 +320,20 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         iv_coin_icon.setText(score.toString())
         if (check <= 8) {
             for (i in 0..ketQua.length - 1) {
-                btnHang1 = ll_hang1.getChildAt(i) as Button
-                btnHang1.setTextColor(Color.BLACK)
-                btnHang1.setBackgroundResource(R.drawable.tile_true)
+                btnAdd = ll_hang1.getChildAt(i) as Button
+                btnAdd.setTextColor(Color.BLACK)
+                btnAdd.setBackgroundResource(R.drawable.tile_true)
             }
         } else {
             for (i in 0..7) {
-                btnHang1 = ll_hang1.getChildAt(i) as Button
-                btnHang1.setTextColor(Color.BLACK)
-                btnHang1.setBackgroundResource(R.drawable.tile_true)
+                btnAdd = ll_hang1.getChildAt(i) as Button
+                btnAdd.setTextColor(Color.BLACK)
+                btnAdd.setBackgroundResource(R.drawable.tile_true)
             }
             for (i in 0..ketQua.length - 9) {
-                btnHang2 = ll_hang2.getChildAt(i) as Button
-                btnHang2.setTextColor(Color.BLACK)
-                btnHang2.setBackgroundResource(R.drawable.tile_true)
+                btnAdd = ll_hang2.getChildAt(i) as Button
+                btnAdd.setTextColor(Color.BLACK)
+                btnAdd.setBackgroundResource(R.drawable.tile_true)
             }
         }
     }
@@ -349,17 +345,17 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         btn_heart.setText(heart.toString())
         if (check <= 8) {
             for (i in 0..ketQua.length - 1) {
-                btnHang1 = ll_hang1.getChildAt(i) as Button
-                btnHang1.setBackgroundResource(R.drawable.tile_false)
+                btnAdd = ll_hang1.getChildAt(i) as Button
+                btnAdd.setBackgroundResource(R.drawable.tile_false)
             }
         } else {
             for (i in 0..7) {
-                btnHang1 = ll_hang1.getChildAt(i) as Button
-                btnHang1.setBackgroundResource(R.drawable.tile_false)
+                btnAdd = ll_hang1.getChildAt(i) as Button
+                btnAdd.setBackgroundResource(R.drawable.tile_false)
             }
             for (i in 0..ketQua.length - 9) {
-                btnHang2 = ll_hang2.getChildAt(i) as Button
-                btnHang2.setBackgroundResource(R.drawable.tile_false)
+                btnAdd = ll_hang2.getChildAt(i) as Button
+                btnAdd.setBackgroundResource(R.drawable.tile_false)
             }
         }
     }
@@ -408,10 +404,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         fl_anh.setBackgroundResource(listHinhAnh[temp].anh)
 
         for (i in 0..7) {
-            btnHang4 = ll_hang4.getChildAt(i) as Button
-            btnHang4.setText(listHinhAnh[temp].chuoiDapAn[i].toString())
-            btnHang3 = ll_hang3.getChildAt(i) as Button
-            btnHang3.setText(listHinhAnh[temp].chuoiDapAn[i + 8].toString())
+            btnAdd = ll_hang4.getChildAt(i) as Button
+            btnAdd.setText(listHinhAnh[temp].chuoiDapAn[i].toString())
+            btnAdd = ll_hang3.getChildAt(i) as Button
+            btnAdd.setText(listHinhAnh[temp].chuoiDapAn[i + 8].toString())
         }
 
         if (ketQua.length > 8) {
@@ -421,7 +417,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 ll_hang1.addView(btnAdd)
                 btnAdd = ll_hang1.getChildAt(i) as Button
                 btnAdd.setOnClickListener {
-                    Toast.makeText(this, i.toString(), Toast.LENGTH_LONG).show()
                     if (i == check - 1 && isDone) {
                         btnAdd = ll_hang1.getChildAt(i) as Button
                         btnAdd.setText("")
@@ -442,7 +437,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                         check--
                         setOnVisibleAfterBack()
                     }
-                    Toast.makeText(this, i.toString(), Toast.LENGTH_LONG).show()
                 }
             }
         } else {
@@ -457,7 +451,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                         check--
                         setOnVisibleAfterBack()
                     }
-                    Toast.makeText(this, i.toString(), Toast.LENGTH_LONG).show()
                 }
             }
         }
