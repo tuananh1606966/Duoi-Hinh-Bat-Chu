@@ -16,8 +16,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private val listHinhAnh: MutableList<HinhAnh>
     private var random: Random
     private var check = 0
-    private var check1 = 0
-    private var check2 = 9
     private lateinit var btnHang1: Button
     private lateinit var btnHang2: Button
     private lateinit var btnHang3: Button
@@ -80,12 +78,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         batDau()
 
-        if (ketQua.length > 8) {
-            btnHang2 = ll_hang2.getChildAt(check2 - 9) as Button
-        } else {
-            btnHang2 = ll_hang1.getChildAt(0) as Button
-        }
-        btnHang1 = ll_hang1.getChildAt(check1) as Button
         setOnClick()
     }
 
@@ -161,8 +153,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             btn_return -> {
                 actionReturn()
             }
-            btnHang1 -> actionBack1()
-            btnHang2 -> actionBack2()
         }
     }
 
@@ -182,52 +172,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 finish()
                 Toast.makeText(this, "Game over", Toast.LENGTH_LONG).show()
             }
-            if (check <= 8) {
-                check1++
-            } else {
-                check2++
-            }
-        }
-        try {
-            btnHang2 = ll_hang2.getChildAt(check2 - 10) as Button
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-        btnHang1 = ll_hang1.getChildAt(check1 - 1) as Button
-        setOnClick()
-    }
-
-    private fun actionBack1() {
-        if (check != 0 && check != ketQua.length && check <= 8) {
-            checkBack1()
-            setOnVisibleAfterBack()
-        }
-    }
-
-    private fun checkBack1() {
-        btnHang1.setText("")
-        check--
-        check1--
-        try {
-            btnHang1 = ll_hang1.getChildAt(check1 - 1) as Button
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-        setOnClick()
-    }
-
-    private fun actionBack2() {
-        if (ketQua.length > 8 && check > 8 && check != ketQua.length) {
-            btnHang2.setText("")
-            check--
-            check2--
-            try {
-                btnHang2 = ll_hang2.getChildAt(check2 - 10) as Button
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-            setOnClick()
-            setOnVisibleAfterBack()
         }
     }
 
@@ -305,8 +249,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         ketQua = listHinhAnh[temp].dapAn
         isDone = true
         check = 0
-        check1 = 0
-        check2 = 9
         listCheckBack.clear()
         strResult = ""
         tv_ketqua.setText("")
@@ -321,8 +263,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         isDone = true
         strResult = ""
         setOnVisible()
-        check1 = 0
-        check2 = 9
         listCheckBack.clear()
         tv_ketqua.setText("")
         btn_return.isInvisible = true
@@ -382,13 +322,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         btn_next.isInvisible = false
         score += 100
         iv_coin_icon.setText(score.toString())
-        if (check == ketQua.length && check <= 8) {
+        if (check <= 8) {
             for (i in 0..ketQua.length - 1) {
                 btnHang1 = ll_hang1.getChildAt(i) as Button
                 btnHang1.setTextColor(Color.BLACK)
                 btnHang1.setBackgroundResource(R.drawable.tile_true)
             }
-        } else if (check == ketQua.length && check > 8) {
+        } else {
             for (i in 0..7) {
                 btnHang1 = ll_hang1.getChildAt(i) as Button
                 btnHang1.setTextColor(Color.BLACK)
@@ -407,12 +347,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         btn_return.isInvisible = false
         heart -= 1
         btn_heart.setText(heart.toString())
-        if (check == ketQua.length && check <= 8) {
+        if (check <= 8) {
             for (i in 0..ketQua.length - 1) {
                 btnHang1 = ll_hang1.getChildAt(i) as Button
                 btnHang1.setBackgroundResource(R.drawable.tile_false)
             }
-        } else if (check == ketQua.length && check > 8) {
+        } else {
             for (i in 0..7) {
                 btnHang1 = ll_hang1.getChildAt(i) as Button
                 btnHang1.setBackgroundResource(R.drawable.tile_false)
@@ -425,8 +365,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun setOnClick() {
-        btnHang1.setOnClickListener(this)
-        btnHang2.setOnClickListener(this)
         btn_return.setOnClickListener(this)
         btn_next.setOnClickListener(this)
         btn_1.setOnClickListener(this)
@@ -481,17 +419,46 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 btnAdd =
                     LayoutInflater.from(this).inflate(R.layout.btn_add, ll_hang1, false) as Button
                 ll_hang1.addView(btnAdd)
+                btnAdd = ll_hang1.getChildAt(i) as Button
+                btnAdd.setOnClickListener {
+                    Toast.makeText(this, i.toString(), Toast.LENGTH_LONG).show()
+                    if (i == check - 1 && isDone) {
+                        btnAdd = ll_hang1.getChildAt(i) as Button
+                        btnAdd.setText("")
+                        check--
+                        setOnVisibleAfterBack()
+                    }
+                }
             }
             for (i in 8..ketQua.length - 1) {
                 btnAdd =
                     LayoutInflater.from(this).inflate(R.layout.btn_add, ll_hang2, false) as Button
                 ll_hang2.addView(btnAdd)
+                btnAdd = ll_hang2.getChildAt(i - 8) as Button
+                btnAdd.setOnClickListener {
+                    if (i == check - 1 && isDone) {
+                        btnAdd = ll_hang2.getChildAt(i - 8) as Button
+                        btnAdd.setText("")
+                        check--
+                        setOnVisibleAfterBack()
+                    }
+                    Toast.makeText(this, i.toString(), Toast.LENGTH_LONG).show()
+                }
             }
         } else {
             for (i in 0..ketQua.length - 1) {
                 btnAdd =
                     LayoutInflater.from(this).inflate(R.layout.btn_add, ll_hang1, false) as Button
                 ll_hang1.addView(btnAdd)
+                btnAdd.setOnClickListener {
+                    if (i == check - 1 && isDone) {
+                        btnAdd = ll_hang1.getChildAt(i) as Button
+                        btnAdd.setText("")
+                        check--
+                        setOnVisibleAfterBack()
+                    }
+                    Toast.makeText(this, i.toString(), Toast.LENGTH_LONG).show()
+                }
             }
         }
         listHinhAnh.removeAt(temp)
